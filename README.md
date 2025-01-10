@@ -20,7 +20,7 @@ The main logging function has the following parameters:
 #### Macros
 While you *could* use the function directly, the intended way to use it is through the macros. 
 
-_LOG macros log to the output log, and message log when in editor. They only need a format string and parameters.
+``_LOG`` macros log to the output log, and message log when in editor. They only need a format string and parameters.
 Examples:
 ```cpp
 TEST_LOG("Test");
@@ -28,17 +28,20 @@ TEST_LOG("The integer is: %d", i);
 TEST_LOG("Name: %s", *GetName());
 TEST_LOG_ERROR("Oh no, the %s is broken", *Thing->GetName());
 ```
-_LOGC macros take in a world context object, and will also log to the viewport console. Examples:
+``_LOGC`` macros take in a world context object, and will also log to the viewport console. Examples:
 ```cpp
 TEST_LOGC(GetWorld(), "Test");
 TEST_LOGC(GetWorld(), "Destroying %d children... not like that!", ChildElements.Num());
 ```
-_LOGS macros don't add the TEXT() macro to the format string, so can be used to use an FString object (for example) as a format string. Example:
+``_LOGS`` macros don't add the ``TEXT()`` macro to the format string, so can be used to use an FString object (for example) as a format string. Example:
 ```cpp
 FString String = "Test";
 TEST_LOGS(String);
 ```
+Macros ending in ``_LOC`` will also print the location of the message (file name, function, and line number).
+
 These macro suffixes can be combined.
+
 #### Generator
 Using the generator is simple. Run it with a Python 3.6 or above, and give the required input. Running the generator will output a .cpp and .h file to the otput directory you set, which should be placed in your modules Source directory (probably under Private). Also, make sure to add the following code to your modules Build.cs:
 
